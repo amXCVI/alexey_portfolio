@@ -1,0 +1,31 @@
+{
+  "mcpServers": {
+    "codebase-rag": {
+      "type": "stdio",
+      "command": "/Users/andrey/projects/alexey_portfolio/.tausik/venv/bin/python3",
+      "args": [
+        "/Users/andrey/projects/alexey_portfolio/.claude/mcp/codebase-rag/server.py",
+        "--project",
+        "/Users/andrey/projects/alexey_portfolio"
+      ]
+    },
+    "tausik-project": {
+      "type": "stdio",
+      "command": "/Users/andrey/projects/alexey_portfolio/.tausik/venv/bin/python3",
+      "args": [
+        "/Users/andrey/projects/alexey_portfolio/.claude/mcp/project/server.py",
+        "--project",
+        "/Users/andrey/projects/alexey_portfolio"
+      ]
+    },
+    "tausik-brain": {
+      "type": "stdio",
+      "command": "/Users/andrey/projects/alexey_portfolio/.tausik/venv/bin/python3",
+      "args": [
+        "/Users/andrey/projects/alexey_portfolio/.claude/mcp/brain/server.py",
+        "--project",
+        "/Users/andrey/projects/alexey_portfolio"
+      ]
+    }
+  }
+}
