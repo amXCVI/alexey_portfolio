@@ -1,0 +1,106 @@
+---
+export interface Props {
+  label: string;
+  arrow?: boolean;
+}
+
+const { label, arrow = false } = Astro.props;
+const uid = `acc-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div class="accordion">
+  <button
+    type="button"
+    class="case-button accordion__trigger"
+    aria-expanded="false"
+    aria-controls={uid}
+  >
+    <span>{label}</span>
+    {
+      arrow && (
+        <svg class="case-button__icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path
+            d="M6 3.5 10.5 8 6 12.5"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      )
+    }
+  </button>
+
+  <div id={uid} class="accordion__panel" role="region" aria-label={`Подробнее: ${label}`}>
+    <div class="accordion__inner">
+      <slot>
+        <p class="accordion__placeholder">Контент кейса скоро будет добавлен.</p>
+      </slot>
+    </div>
+  </div>
+</div>
+
+<style>
+  .accordion {
+    width: 100%;
+  }
+
+  /* Default (no-JS): panel is open so content stays accessible. */
+  .accordion__panel {
+    display: grid;
+    grid-template-rows: 1fr;
+  }
+
+  /* JS marks accordions collapsible; closed = 0fr, open = 1fr. */
+  .accordion.is-collapsible .accordion__panel {
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.26s ease;
+  }
+
+  .accordion.is-open .accordion__panel {
+    grid-template-rows: 1fr;
+  }
+
+  .accordion__inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .accordion__placeholder {
+    padding-top: var(--space-4);
+    color: var(--color-muted);
+    font-size: var(--fs-body);
+    line-height: var(--lh-30);
+  }
+
+  .accordion__trigger .case-button__icon {
+    transform: rotate(0deg);
+  }
+
+  .accordion.is-open .case-button__icon {
+    transform: rotate(90deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .accordion.is-collapsible .accordion__panel {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // Progressive enhancement: without JS the panels render expanded (content
+  // is reachable). With JS we collapse them and toggle on demand.
+  const accordions = document.querySelectorAll<HTMLElement>('.accordion');
+  accordions.forEach((acc) => {
+    const trigger = acc.querySelector<HTMLButtonElement>('.accordion__trigger');
+    if (!trigger) return;
+    acc.classList.add('is-collapsible');
+    acc.classList.remove('is-open');
+    trigger.setAttribute('aria-expanded', 'false');
+    trigger.addEventListener('click', () => {
+      const open = acc.classList.toggle('is-open');
+      trigger.setAttribute('aria-expanded', String(open));
+    });
+  });
+</script>

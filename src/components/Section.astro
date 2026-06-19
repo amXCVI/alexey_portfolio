@@ -1,0 +1,24 @@
+---
+export interface Props {
+  title: string;
+  /** Render the body inside a surface card (default) or bare. */
+  card?: boolean;
+  /** 'md' = 20px semibold (default), 'lg' = 24px bold (e.g. «Опыт работы»). */
+  size?: 'md' | 'lg';
+}
+
+const { title, card = true, size = 'md' } = Astro.props;
+---
+
+<section class="section">
+  <h2 class:list={['section-title', size === 'lg' && 'section-title--lg']}>{title}</h2>
+  {
+    card ? (
+      <div class="card">
+        <slot />
+      </div>
+    ) : (
+      <slot />
+    )
+  }
+</section>

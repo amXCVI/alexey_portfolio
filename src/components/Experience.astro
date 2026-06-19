@@ -1,0 +1,19 @@
+---
+import Section from './Section.astro';
+import ExperienceCard from './ExperienceCard.astro';
+import { jobs } from '../data/content.ts';
+---
+
+<Section title="Опыт работы" card={false} size="lg">
+  <div class="experience">
+    {jobs.map((job) => <ExperienceCard job={job} />)}
+  </div>
+</Section>
+
+<style>
+  .experience {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+</style>

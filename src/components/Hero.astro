@@ -1,0 +1,89 @@
+---
+import { Image } from 'astro:assets';
+import avatar from '../assets/images/avatar.png';
+---
+
+<header class="hero">
+  <div class="hero__photo">
+    <Image src={avatar} alt="Портрет Алексея С." widths={[176, 352]} sizes="176px" />
+  </div>
+
+  <div class="hero__body">
+    <div class="hero__title">
+      <h1>Алексей С.</h1>
+      <p class="hero__subtitle">
+        Product Designer с 11-летним опытом создания цифровых продуктов для SaaS,
+        Web3, игровых и мобильных платформ.
+      </p>
+    </div>
+    <p class="hero__intro">
+      Проектирую интерфейсы для цифровых продуктов — от идеи до запуска. Люблю
+      создавать решения на стыке технологий, бизнеса и потребностей пользователей.
+    </p>
+  </div>
+</header>
+
+<style>
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: var(--space-7);
+  }
+
+  .hero__photo {
+    flex-shrink: 0;
+    width: 176px;
+    aspect-ratio: 176 / 192;
+    border-radius: var(--radius-media);
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+
+  .hero__photo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .hero__title {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  h1 {
+    font-size: var(--fs-h1);
+    font-weight: var(--fw-semibold);
+    line-height: 1.1;
+    color: var(--color-heading);
+    letter-spacing: -0.01em;
+  }
+
+  .hero__subtitle {
+    font-size: var(--fs-sub);
+    font-weight: var(--fw-light);
+    line-height: var(--lh-32);
+    color: var(--color-text);
+  }
+
+  .hero__intro {
+    font-size: var(--fs-intro);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-30);
+    color: var(--color-text);
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-5);
+    }
+  }
+</style>

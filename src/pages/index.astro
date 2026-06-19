@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import SkillsCard from '../components/SkillsCard.astro';
+import TechStackCard from '../components/TechStackCard.astro';
+import Experience from '../components/Experience.astro';
+---
+
+<Layout>
+  <main class="page container">
+    <Hero />
+    <SkillsCard />
+    <TechStackCard />
+    <Experience />
+  </main>
+</Layout>
+
+<style>
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-7);
+    padding-block: clamp(var(--space-6), 6vw, calc(var(--space-7) + var(--space-1)));
+  }
+</style>

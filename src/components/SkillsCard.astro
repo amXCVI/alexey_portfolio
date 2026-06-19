@@ -1,0 +1,37 @@
+---
+import Section from './Section.astro';
+import { skills, skillsNote } from '../data/content.ts';
+---
+
+<Section title="Навыки">
+  <div class="skills">
+    <ul class="bullets">
+      {skills.map((item) => <li>{item}</li>)}
+    </ul>
+    <blockquote class="skills__note">
+      {skillsNote.map((line) => <p>{line}</p>)}
+    </blockquote>
+  </div>
+</Section>
+
+<style>
+  .skills {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    font-size: var(--fs-body);
+    font-weight: var(--fw-regular);
+  }
+
+  .skills__note {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-inline-start: var(--space-3);
+    padding-inline-start: var(--space-5);
+    border-inline-start: 1px solid var(--color-rule);
+    color: var(--color-text);
+    font-size: var(--fs-body);
+    line-height: var(--lh-30);
+  }
+</style>

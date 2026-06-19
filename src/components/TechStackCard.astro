@@ -1,0 +1,36 @@
+---
+import Section from './Section.astro';
+import { techStack, techSubLabel, techExtra } from '../data/content.ts';
+---
+
+<Section title="Tech Стек">
+  <div class="tech">
+    <ul class="bullets">
+      {techStack.map((item) => <li>{item}</li>)}
+    </ul>
+    <p class="tech__sublabel">{techSubLabel}</p>
+    <ul class="bullets">
+      {techExtra.map((item) => <li>{item}</li>)}
+    </ul>
+  </div>
+</Section>
+
+<style>
+  .tech {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    font-size: var(--fs-role);
+    font-weight: var(--fw-medium);
+  }
+
+  .tech :global(.bullets > li) {
+    line-height: var(--lh-32);
+  }
+
+  .tech__sublabel {
+    padding-inline-start: calc(var(--space-4) + var(--space-2));
+    color: var(--color-muted);
+    line-height: var(--lh-32);
+  }
+</style>

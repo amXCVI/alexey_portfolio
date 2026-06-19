@@ -1,0 +1,52 @@
+---
+// Self-hosted variable font (weights 300–600 used). font-display: swap keeps
+// text visible on a system fallback if the font fails to load.
+import '@fontsource-variable/manrope';
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Алексей С. — Product Designer',
+  description = 'Product Designer с 11-летним опытом создания цифровых продуктов для SaaS, Web3, игровых и мобильных платформ.',
+} = Astro.props;
+
+const site = Astro.site ?? new URL('https://example.com');
+// Join the (possibly trailing-slash-less) base with a public asset path.
+const withBase = (path: string) =>
+  `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
+const faviconHref = withBase('favicon.svg');
+const ogImage = new URL(withBase('og.png'), site);
+const canonical = new URL(Astro.url.pathname, site);
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#f2f2f2" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="ru_RU" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" type="image/svg+xml" href={faviconHref} />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

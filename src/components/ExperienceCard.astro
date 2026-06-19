@@ -1,0 +1,180 @@
+---
+import { Image } from 'astro:assets';
+import Accordion from './Accordion.astro';
+import arImg from '../assets/images/ar-spatially.png';
+import tapImg from '../assets/images/tap-topia.png';
+import type { Job } from '../data/content.ts';
+
+export interface Props {
+  job: Job;
+}
+
+const { job } = Astro.props;
+const imageMap = { ar: arImg, tap: tapImg } as const;
+const preview = job.image ? imageMap[job.image] : null;
+---
+
+<article class="job card" class:list={[{ 'job--media': preview }]}>
+  {
+    preview && (
+      <div class="job__preview">
+        <Image
+          src={preview}
+          alt={`Превью проекта ${job.company}`}
+          widths={[330, 660]}
+          sizes="(max-width: 760px) 100vw, 330px"
+        />
+      </div>
+    )
+  }
+
+  <div class="job__body">
+    <header class="job__header">
+      <p class="job__company">{job.company}</p>
+      <div class="job__meta">
+        <p class="job__role" class:list={[{ 'job__role--lg': job.roleLarge }]}>{job.role}</p>
+        <p class="job__period">{job.period}</p>
+      </div>
+    </header>
+
+    <p class="job__desc" class:list={[`job__desc--${job.tone}`]}>{job.description}</p>
+
+    {
+      job.subProjects && (
+        <div class="job__subprojects">
+          {job.subProjects.map((sub) => (
+            <div class="subproject">
+              <ul class="bullets">
+                <li>{sub.title}</li>
+              </ul>
+              <blockquote class="subproject__note">{sub.note}</blockquote>
+              <Accordion label={sub.cta} />
+            </div>
+          ))}
+        </div>
+      )
+    }
+
+    {job.cta && <Accordion label={job.cta} arrow={job.ctaArrow} />}
+  </div>
+</article>
+
+<style>
+  .job {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .job--media {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-6);
+  }
+
+  .job__preview {
+    flex-shrink: 0;
+    width: 330px;
+    aspect-ratio: 330 / 248;
+    border-radius: var(--radius-media);
+    overflow: hidden;
+    background: var(--color-bg);
+  }
+
+  .job__preview :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .job__body {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    align-items: flex-start;
+  }
+
+  .job__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .job__company {
+    font-size: var(--fs-section);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-32);
+    color: var(--color-accent);
+  }
+
+  .job__role {
+    font-size: var(--fs-role);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-32);
+    color: var(--color-heading);
+  }
+
+  .job__role--lg {
+    font-size: var(--fs-section);
+  }
+
+  .job__period {
+    font-size: var(--fs-period);
+    font-weight: var(--fw-light);
+    color: var(--color-period);
+  }
+
+  .job__desc {
+    font-size: var(--fs-body);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-30);
+  }
+
+  .job__desc--muted {
+    color: var(--color-text);
+  }
+
+  .job__desc--strong {
+    color: var(--color-heading);
+  }
+
+  .job__subprojects {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    width: 100%;
+  }
+
+  .subproject {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: flex-start;
+  }
+
+  .subproject .bullets > li {
+    font-size: var(--fs-role);
+    line-height: var(--lh-32);
+  }
+
+  .subproject__note {
+    margin-inline-start: var(--space-5);
+    padding-inline-start: var(--space-5);
+    border-inline-start: 1px solid var(--color-period);
+    color: var(--color-text);
+    font-size: var(--fs-body);
+    line-height: var(--lh-30);
+  }
+
+  @media (max-width: 760px) {
+    .job--media {
+      flex-direction: column;
+    }
+
+    .job__preview {
+      width: 100%;
+    }
+  }
+</style>

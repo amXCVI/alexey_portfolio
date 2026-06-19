@@ -1,0 +1,180 @@
+/* Global reset + base. Design tokens live in tokens.css (imported below). */
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-heading);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Centred content column matching the Figma 1088px layout. */
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---- Section + card primitives (shared by Навыки / Tech Стек / Опыт) ---- */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.section-title {
+  font-size: var(--fs-section);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-32);
+  color: var(--color-heading);
+  padding-inline-start: var(--section-title-indent, 44px);
+}
+
+.section-title--lg {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 700;
+}
+
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  padding: var(--space-5) var(--space-6);
+}
+
+/* Diamond-marker list matching the Figma bullet. */
+.bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.bullets > li {
+  position: relative;
+  padding-inline-start: calc(var(--space-4) + var(--space-2));
+  color: var(--color-heading);
+  line-height: var(--lh-30);
+}
+
+.bullets > li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  transform: rotate(45deg);
+  background: currentColor;
+}
+
+/* ---- Case-study pill button (shared by static button + accordion summary) ---- */
+.case-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-white);
+  color: var(--color-heading);
+  font-size: var(--fs-sub);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+  border: none;
+  border-radius: var(--radius-pill);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.05),
+    0 0 0 1px var(--color-button-ring);
+  cursor: pointer;
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.case-button:hover {
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    0 0 0 1px var(--color-button-ring);
+}
+
+.case-button:active {
+  transform: translateY(1px);
+}
+
+.case-button__icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- Small-screen refinements ---- */
+@media (max-width: 640px) {
+  :root {
+    --section-title-indent: var(--space-4); /* tighter indent on phones */
+  }
+
+  .card {
+    padding: var(--space-5) var(--space-4);
+    border-radius: 28px;
+  }
+
+  .skills__note {
+    margin-inline-start: 0;
+  }
+}

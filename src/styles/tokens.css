@@ -1,0 +1,57 @@
+/*
+ * Design tokens — extracted from Figma (file SagpfeC9cZBWcmybhRFqab, frames 334:8926 / 387:9628).
+ * Single source of truth for colours, typography, spacing, radii and layout.
+ */
+:root {
+  /* ---- Typography ---- */
+  --font-sans: 'Manrope Variable', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+
+  --fs-h1: clamp(2rem, 1.4rem + 3vw, 2.75rem); /* 32→44px — hero name */
+  --fs-section: 1.25rem;   /* 20px — section / project titles */
+  --section-title-indent: 44px;
+  --fs-role: 1.125rem;     /* 18px — role, tech-stack items */
+  --fs-intro: 1.0625rem;   /* 17px — hero intro */
+  --fs-body: 1rem;         /* 16px — list / description text */
+  --fs-sub: 0.9375rem;     /* 15px — hero subtitle, button label */
+  --fs-period: 0.875rem;   /* 14px — work period */
+
+  --lh-30: 1.875rem;       /* 30px */
+  --lh-32: 2rem;           /* 32px */
+
+  /* ---- Colours ---- */
+  --color-bg: #f2f2f2;         /* page background */
+  --color-surface: #fafafa;    /* skill / tech cards */
+  --color-white: #ffffff;      /* buttons */
+  --color-heading: #201f1f;    /* headings, strong text */
+  --color-text: #363636;       /* body text */
+  --color-muted: #6f6f6f;      /* muted sub-labels — darkened from Figma #888787 to meet WCAG AA on #fafafa */
+  --color-rule: #6d6d6d;       /* quote / divider line */
+  --color-period: #000000;     /* work period text */
+  --color-accent: #ee6a0d;     /* project name accent (orange) */
+
+  --color-button-track: rgba(0, 0, 0, 0.02); /* faint backplate behind pill buttons */
+  --color-button-ring: rgba(0, 0, 0, 0.06);
+
+  /* ---- Spacing scale ---- */
+  --space-1: 0.25rem;   /* 4 */
+  --space-2: 0.5rem;    /* 8 */
+  --space-3: 0.75rem;   /* 12 */
+  --space-4: 1rem;      /* 16 */
+  --space-5: 1.5rem;    /* 24 */
+  --space-6: 2rem;      /* 32 */
+  --space-7: 2.5rem;    /* 40 */
+
+  /* ---- Radii ---- */
+  --radius-card: 40px;
+  --radius-media: 20px;
+  --radius-pill: 999px;
+
+  /* ---- Layout ---- */
+  --container: 1088px;            /* centred content column (1728 − 2×320) */
+  --gutter: clamp(1rem, 5vw, 2.5rem);
+}
