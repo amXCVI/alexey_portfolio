@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+/**
+ * CaseImage — a single responsive figure. `rounded` applies the media radius
+ * (default true). Intrinsic width/height come from the imported ImageMetadata,
+ * so layout never shifts and there is no horizontal overflow on mobile.
+ */
+export interface Props {
+  src: ImageMetadata;
+  alt: string;
+  rounded?: boolean;
+  /** Optional caption rendered beneath the image. */
+  caption?: string;
+}
+
+const { src, alt, rounded = true, caption } = Astro.props;
+---
+
+<figure class="case-image">
+  <Image
+    src={src}
+    alt={alt}
+    class:list={['case-image__img', { 'case-image__img--rounded': rounded }]}
+  />
+  {caption && <figcaption class="case-image__caption">{caption}</figcaption>}
+</figure>
+
+<style>
+  .case-image {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .case-image__img {
+    width: 100%;
+    height: auto;
+  }
+
+  .case-image__img--rounded {
+    border-radius: var(--radius-media);
+    overflow: hidden;
+  }
+
+  .case-image__caption {
+    font-size: var(--fs-sub);
+    color: var(--color-muted);
+    line-height: var(--lh-30);
+    text-align: center;
+  }
+</style>

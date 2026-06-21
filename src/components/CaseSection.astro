@@ -1,0 +1,69 @@
+---
+/**
+ * CaseSection — a content section with a centred title, slotted body and an
+ * optional bullet list. Mirrors the home page `.section` rhythm but centres
+ * the heading as the Figma case pages do.
+ */
+export interface Props {
+  heading: string;
+  /** Optional diamond-bullet list rendered after the slotted body. */
+  list?: string[];
+}
+
+const { heading, list } = Astro.props;
+---
+
+<section class="case-section">
+  <h2 class="case-section__title">{heading}</h2>
+  <div class="case-section__body card">
+    <slot />
+    {
+      list && list.length > 0 && (
+        <ul class="bullets case-section__list">
+          {list.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .case-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .case-section__title {
+    font-size: var(--fs-section);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-32);
+    color: var(--color-heading);
+    text-align: center;
+  }
+
+  .case-section__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    font-size: var(--fs-body);
+    line-height: var(--lh-30);
+    color: var(--color-text);
+  }
+
+  .case-section__body :global(p) {
+    line-height: var(--lh-30);
+  }
+
+  .case-section__list {
+    font-size: var(--fs-body);
+  }
+
+  @media (max-width: 640px) {
+    .case-section__title {
+      text-align: left;
+    }
+  }
+</style>

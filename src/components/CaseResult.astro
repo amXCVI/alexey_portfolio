@@ -1,0 +1,59 @@
+---
+/**
+ * CaseResult — the terminal «Результат» section: centred heading, slotted
+ * intro, and a bullet list of outcomes. A nested achievements block can be
+ * passed via the `achievements` slot. Styled to match CaseSection.
+ */
+export interface Props {
+  heading: string;
+  items: string[];
+}
+
+const { heading, items } = Astro.props;
+---
+
+<section class="case-result">
+  <h2 class="case-result__title">{heading}</h2>
+  <div class="case-result__body card">
+    <slot />
+    <ul class="bullets case-result__list">
+      {items.map((item) => <li>{item}</li>)}
+    </ul>
+    <slot name="achievements" />
+  </div>
+</section>
+
+<style>
+  .case-result {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .case-result__title {
+    font-size: var(--fs-section);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-32);
+    color: var(--color-heading);
+    text-align: center;
+  }
+
+  .case-result__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    font-size: var(--fs-body);
+    line-height: var(--lh-30);
+    color: var(--color-text);
+  }
+
+  .case-result__list {
+    font-size: var(--fs-body);
+  }
+
+  @media (max-width: 640px) {
+    .case-result__title {
+      text-align: left;
+    }
+  }
+</style>
