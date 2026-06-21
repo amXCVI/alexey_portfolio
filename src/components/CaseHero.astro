@@ -19,11 +19,11 @@ const { title, meta, description, tags } = Astro.props;
 
   {
     meta && meta.length > 0 && (
-      <dl class="case-hero__meta">
+      <div class="case-hero__meta">
         {meta.map((line) => (
-          <div class="case-hero__meta-row">{line}</div>
+          <p class="case-hero__meta-row">{line}</p>
         ))}
-      </dl>
+      </div>
     )
   }
 
