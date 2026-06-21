@@ -31,6 +31,8 @@ export interface SubProject {
   note: string;
   /** Case-study button label. */
   cta: string;
+  /** Route to the case page, if it exists. Omit when the page is not yet built. */
+  href?: string;
 }
 
 export interface Job {
@@ -47,6 +49,8 @@ export interface Job {
   roleLarge?: boolean;
   /** Card-level case-study button (omitted when sub-projects carry their own). */
   cta?: string;
+  /** Route to the case page, if it exists. Omit when the page is not yet built. */
+  href?: string;
   /** NXmarketing-style button with a trailing arrow. */
   ctaArrow?: boolean;
   subProjects?: SubProject[];
@@ -62,6 +66,7 @@ export const jobs: Job[] = [
     tone: 'muted',
     image: 'ar',
     cta: 'Кейс продукта',
+    href: '/cases/ar-spatially',
   },
   {
     company: 'Tap Topia - Web3 Play 2 Own battle game',

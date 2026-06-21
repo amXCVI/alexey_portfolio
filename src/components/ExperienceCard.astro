@@ -48,14 +48,38 @@ const preview = job.image ? imageMap[job.image] : null;
                 <li>{sub.title}</li>
               </ul>
               <blockquote class="subproject__note">{sub.note}</blockquote>
-              <Accordion label={sub.cta} />
+              {sub.href ? (
+                <a href={sub.href} class="case-button case-button--link">
+                  <span class="case-button__face">{sub.cta}</span>
+                </a>
+              ) : (
+                <span class="case-button case-button--inactive" aria-disabled="true">
+                  <span class="case-button__face">{sub.cta}</span>
+                </span>
+              )}
             </div>
           ))}
         </div>
       )
     }
 
-    {job.cta && <Accordion label={job.cta} arrow={job.ctaArrow} />}
+    {
+      job.cta && (
+        job.href ? (
+          <a href={job.href} class="case-button case-button--link">
+            <span class="case-button__face">
+              {job.cta}
+            </span>
+          </a>
+        ) : job.ctaArrow ? (
+          <Accordion label={job.cta} arrow={job.ctaArrow} />
+        ) : (
+          <span class="case-button case-button--inactive" aria-disabled="true">
+            <span class="case-button__face">{job.cta}</span>
+          </span>
+        )
+      )
+    }
   </div>
 </article>
 
@@ -166,6 +190,23 @@ const preview = job.image ? imageMap[job.image] : null;
     color: var(--color-text);
     font-size: var(--fs-body);
     line-height: var(--lh-30);
+  }
+
+  /* Link variant: inherits .case-button from global.css; reset <a> defaults */
+  .case-button--link {
+    text-decoration: none;
+  }
+
+  .case-button--link:hover .case-button__face,
+  .case-button--link:focus-visible .case-button__face {
+    transform: translateY(-1px);
+  }
+
+  /* Inactive variant: de-emphasised, non-interactive */
+  .case-button--inactive {
+    opacity: 0.4;
+    cursor: default;
+    pointer-events: none;
   }
 
   @media (max-width: 760px) {
