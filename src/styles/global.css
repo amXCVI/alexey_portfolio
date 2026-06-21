@@ -103,44 +103,42 @@ button {
   content: '';
   position: absolute;
   inset-inline-start: 0;
-  top: 0.62em;
-  width: 5px;
-  height: 5px;
-  transform: rotate(45deg);
+  top: 0.8em;
+  width: 6px;
+  height: 2px;
+  border-radius: var(--radius-pill);
   background: currentColor;
 }
 
-/* ---- Case-study pill button (shared by static button + accordion summary) ---- */
+/* ---- Case-study pill button ----
+   Outer = #F5F5F5 rounded backplate; inner white face inset 8px all round. */
 .case-button {
+  display: inline-block;
+  padding: var(--space-2); /* 8px inset around the white face */
+  background: var(--color-button-track);
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.case-button__face {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-2);
-  min-height: 44px;
+  min-height: 28px; /* + 2×8px backplate ⇒ ≥44px touch target */
   padding: var(--space-4) var(--space-6);
   background: var(--color-white);
   color: var(--color-heading);
   font-size: var(--fs-sub);
   font-weight: var(--fw-medium);
   line-height: 1;
-  border: none;
   border-radius: var(--radius-pill);
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.05),
-    0 0 0 1px var(--color-button-ring);
-  cursor: pointer;
-  transition:
-    box-shadow 0.15s ease,
-    transform 0.15s ease;
-  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease;
 }
 
-.case-button:hover {
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.08),
-    0 0 0 1px var(--color-button-ring);
-}
-
-.case-button:active {
+.case-button:active .case-button__face {
   transform: translateY(1px);
 }
 

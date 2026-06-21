@@ -15,20 +15,22 @@ const uid = `acc-${Math.random().toString(36).slice(2, 9)}`;
     aria-expanded="false"
     aria-controls={uid}
   >
-    <span>{label}</span>
-    {
-      arrow && (
-        <svg class="case-button__icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path
-            d="M6 3.5 10.5 8 6 12.5"
-            stroke="currentColor"
-            stroke-width="1.6"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      )
-    }
+    <span class="case-button__face">
+      <span>{label}</span>
+      {
+        arrow && (
+          <svg class="case-button__icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path
+              d="M6 3.5 10.5 8 6 12.5"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        )
+      }
+    </span>
   </button>
 
   <div id={uid} class="accordion__panel" role="region" aria-label={`Подробнее: ${label}`}>

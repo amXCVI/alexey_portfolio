@@ -34,8 +34,7 @@
   --color-period: #000000;     /* work period text */
   --color-accent: #ee6a0d;     /* project name accent (orange) */
 
-  --color-button-track: rgba(0, 0, 0, 0.02); /* faint backplate behind pill buttons */
-  --color-button-ring: rgba(0, 0, 0, 0.06);
+  --color-button-track: #f5f5f5; /* backplate behind the white pill button */
 
   /* ---- Spacing scale ---- */
   --space-1: 0.25rem;   /* 4 */
