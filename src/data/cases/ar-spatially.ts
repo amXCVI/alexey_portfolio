@@ -6,6 +6,25 @@ import type { ImageMetadata } from 'astro';
  * separately in each page via `astro:assets` imports.
  */
 
+/**
+ * Describes one image that a case page needs.
+ * When the PNG is exported, swap the matching <CasePlaceholder> for a
+ * <CaseImage> / <CaseGallery> and delete the manifest entry (or keep it for
+ * documentation — it does not affect the build).
+ */
+export interface CaseImageManifestEntry {
+  /** Path relative to src/assets/ — create the directory if absent. */
+  filename: string;
+  /** Human description drawn from the Figma section it represents. */
+  description: string;
+  /** CSS aspect-ratio string passed to <CasePlaceholder ratio={…}> */
+  ratio: string;
+  /** Where it appears in the page (section name + position). */
+  section: string;
+  /** Figma node id for reference when exporting. */
+  figmaNode?: string;
+}
+
 /** A labelled image (used in galleries and standalone figures). */
 export interface CaseImageItem {
   src: ImageMetadata;
@@ -175,5 +194,135 @@ export const arSpatially: CaseContent = {
     },
   },
 };
+
+/**
+ * Image manifest for the AR Spatially case page.
+ * Every entry corresponds to one <CasePlaceholder> in the page.
+ * To swap in a real image:
+ *   1. Export the PNG from Figma into src/assets/cases/ar-spatially/<filename>
+ *   2. In ar-spatially.astro, add: import img from '../../assets/cases/ar-spatially/<filename>';
+ *   3. Replace <CasePlaceholder label="<filename> — …" /> with <CaseImage src={img} alt="…" />
+ */
+export const arSpatiallyImages: CaseImageManifestEntry[] = [
+  {
+    filename: 'cases/ar-spatially/iteration-01.png',
+    description: 'Первый вариант интерфейса — iteration 1 UI mockup',
+    ratio: '9/16',
+    section: 'Этапы создания проекта — iteration row, left',
+    figmaNode: '444:32',
+  },
+  {
+    filename: 'cases/ar-spatially/iteration-02.png',
+    description: 'Второй вариант интерфейса — iteration 2 UI mockup',
+    ratio: '9/16',
+    section: 'Этапы создания проекта — iteration row, right',
+    figmaNode: '444:31',
+  },
+  {
+    filename: 'cases/ar-spatially/final-screens-1.png',
+    description: 'Конечный вариант — final phone screen 1 of 6',
+    ratio: '9/16',
+    section: 'Этапы создания проекта — final 6-screen row, screen 1',
+    figmaNode: '407:5281',
+  },
+  {
+    filename: 'cases/ar-spatially/final-screens-2.png',
+    description: 'Конечный вариант — final phone screen 2 of 6',
+    ratio: '9/16',
+    section: 'Этапы создания проекта — final 6-screen row, screen 2',
+    figmaNode: '407:5281',
+  },
+  {
+    filename: 'cases/ar-spatially/final-screens-3.png',
+    description: 'Конечный вариант — final phone screen 3 of 6',
+    ratio: '9/16',
+    section: 'Этапы создания проекта — final 6-screen row, screen 3',
+    figmaNode: '407:5281',
+  },
+  {
+    filename: 'cases/ar-spatially/final-screens-4.png',
+    description: 'Конечный вариант — final phone screen 4 of 6',
+    ratio: '9/16',
+    section: 'Этапы создания проекта — final 6-screen row, screen 4',
+    figmaNode: '407:5281',
+  },
+  {
+    filename: 'cases/ar-spatially/final-screens-5.png',
+    description: 'Конечный вариант — final phone screen 5 of 6',
+    ratio: '9/16',
+    section: 'Этапы создания проекта — final 6-screen row, screen 5',
+    figmaNode: '407:5281',
+  },
+  {
+    filename: 'cases/ar-spatially/final-screens-6.png',
+    description: 'Конечный вариант — final phone screen 6 of 6',
+    ratio: '9/16',
+    section: 'Этапы создания проекта — final 6-screen row, screen 6',
+    figmaNode: '407:5281',
+  },
+  {
+    filename: 'cases/ar-spatially/flow-ar-anchor.png',
+    description: 'User Flow: AR-anchor — пользовательский поток AR-привязки',
+    ratio: '16/9',
+    section: 'Основные UX-вызовы — flow diagram 1',
+    figmaNode: '425:4777',
+  },
+  {
+    filename: 'cases/ar-spatially/flow-navigation.png',
+    description: 'Многоуровневая навигация — navigation flow diagram',
+    ratio: '16/9',
+    section: 'Основные UX-вызовы — flow diagram 2',
+    figmaNode: '416:4728',
+  },
+  {
+    filename: 'cases/ar-spatially/ux-screens-1.png',
+    description: 'Основные UX-вызовы — UX phone screen 1 of 6',
+    ratio: '9/16',
+    section: 'Основные UX-вызовы — 6-screen row, screen 1',
+    figmaNode: '408:9445',
+  },
+  {
+    filename: 'cases/ar-spatially/ux-screens-2.png',
+    description: 'Основные UX-вызовы — UX phone screen 2 of 6',
+    ratio: '9/16',
+    section: 'Основные UX-вызовы — 6-screen row, screen 2',
+    figmaNode: '408:9445',
+  },
+  {
+    filename: 'cases/ar-spatially/ux-screens-3.png',
+    description: 'Основные UX-вызовы — UX phone screen 3 of 6',
+    ratio: '9/16',
+    section: 'Основные UX-вызовы — 6-screen row, screen 3',
+    figmaNode: '408:9445',
+  },
+  {
+    filename: 'cases/ar-spatially/ux-screens-4.png',
+    description: 'Основные UX-вызовы — UX phone screen 4 of 6',
+    ratio: '9/16',
+    section: 'Основные UX-вызовы — 6-screen row, screen 4',
+    figmaNode: '408:9445',
+  },
+  {
+    filename: 'cases/ar-spatially/ux-screens-5.png',
+    description: 'Основные UX-вызовы — UX phone screen 5 of 6',
+    ratio: '9/16',
+    section: 'Основные UX-вызовы — 6-screen row, screen 5',
+    figmaNode: '408:9445',
+  },
+  {
+    filename: 'cases/ar-spatially/ux-screens-6.png',
+    description: 'Основные UX-вызовы — UX phone screen 6 of 6',
+    ratio: '9/16',
+    section: 'Основные UX-вызовы — 6-screen row, screen 6',
+    figmaNode: '408:9445',
+  },
+  {
+    filename: 'cases/ar-spatially/flow-positioning.png',
+    description: 'Позиционирование AR объекта — AR object positioning flow',
+    ratio: '16/9',
+    section: 'Основные UX-вызовы — flow diagram 3',
+    figmaNode: '418:4753',
+  },
+];
 
 export default arSpatially;

@@ -1,0 +1,48 @@
+---
+/**
+ * CasePlaceholder — visual stand-in for an image that has not been exported yet.
+ *
+ * Props
+ *   label  — describes WHAT image belongs here + the intended filename,
+ *             so swap-in is unambiguous.
+ *   ratio  — CSS aspect-ratio value (default "16/10").
+ *
+ * Swap-in pattern (one-line change per placeholder):
+ *   Before:  <CasePlaceholder label="hero-banner.png — Hero banner" ratio="16/9" />
+ *   After:   import heroBanner from '../assets/cases/ar-spatially/hero-banner.png';
+ *            <CaseImage src={heroBanner} alt="Hero banner" />
+ */
+
+export interface Props {
+  label: string;
+  ratio?: string;
+}
+
+const { label, ratio = '16/10' } = Astro.props;
+---
+
+<div class="case-placeholder" style={`aspect-ratio: ${ratio};`}>
+  <span class="case-placeholder__label">{label}</span>
+</div>
+
+<style>
+  .case-placeholder {
+    width: 100%;
+    border: 2px dashed var(--color-muted);
+    border-radius: var(--radius-media);
+    background-color: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .case-placeholder__label {
+    font-size: var(--fs-sub);
+    color: var(--color-muted);
+    text-align: center;
+    padding: var(--space-4);
+    max-width: 80%;
+    line-height: var(--lh-30);
+  }
+</style>

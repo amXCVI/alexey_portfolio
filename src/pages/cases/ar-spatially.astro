@@ -1,30 +1,24 @@
 ---
+// ---------------------------------------------------------------------------
+// IMAGE SWAP PATTERN
+// When a real PNG lands in src/assets/cases/ar-spatially/<name>.png:
+//   1. Add import:  import myImg from '../../assets/cases/ar-spatially/<name>.png';
+//   2. Replace:     <CasePlaceholder label="<name>.png — …" ratio="…" />
+//      With:        <CaseImage src={myImg} alt="…" />
+//            or:    <CaseGallery images={[{ src: myImg, alt: "…" }]} />
+// See arSpatiallyImages manifest in src/data/cases/ar-spatially.ts for all
+// filenames, aspect ratios, and Figma node ids.
+// ---------------------------------------------------------------------------
+
 import CaseLayout from '../../components/CaseLayout.astro';
 import CaseHero from '../../components/CaseHero.astro';
 import CaseSection from '../../components/CaseSection.astro';
 import CaseResult from '../../components/CaseResult.astro';
-import CaseBanner from '../../components/CaseBanner.astro';
-// CaseImage and CaseGallery are ready for the image slots below — imported in
-// this page once the Figma binaries are exported (see IMAGERY note).
+import CasePlaceholder from '../../components/CasePlaceholder.astro';
+// CaseImage and CaseGallery imported once real PNGs are exported from Figma:
+// import CaseImage from '../../components/CaseImage.astro';
+// import CaseGallery from '../../components/CaseGallery.astro';
 import { arSpatially } from '../../data/cases/ar-spatially.ts';
-
-// ---------------------------------------------------------------------------
-// IMAGERY — BLOCKED this billing cycle.
-// The Figma MCP server is on the Starter plan (6 read tool calls / MONTH).
-// get_metadata(397-5037) succeeded and provided all the copy below, but the
-// asset download URLs are only returned by get_design_context, which is now
-// past quota. When the quota resets, export the following nodes into
-// src/assets/cases/ar-spatially/ and import them here, then drop them into the
-// marked slots (CaseImage / CaseGallery / CaseBanner) in section order:
-//
-//   444:32  image 11 .............. iteration-01.png   (первый вариант интерфейса)
-//   444:31  Vector ................ iteration-02.png   (второй вариант интерфейса)
-//   407:5281 phone row (6 screens). final-screens-*.png (И конечный вариант)
-//   425:4777 image 7 .............. flow-ar-anchor.png (User Flow: AR-anchor)
-//   416:4728 image 5 .............. flow-navigation.png (многоуровневая навигация)
-//   408:9445 phone row (6 screens). ux-screens-*.png   (Основные UX-вызовы)
-//   418:4753 image 6 .............. flow-positioning.png (позиционирование AR объекта)
-// ---------------------------------------------------------------------------
 
 const { title, meta, description, tags, sections, result } = arSpatially;
 const [intro, goal, stages, challenges, decisions] = sections;
@@ -52,20 +46,114 @@ const [intro, goal, stages, challenges, decisions] = sections;
   </CaseSection>
 
   {/*
-    IMAGE SLOT (444:21): two iteration mockups + the final 6-screen row.
-    Caption plates rendered as CaseBanner so the design intent is preserved
-    even before the binaries are exported.
+    IMAGE SLOT — iteration mockups (Figma 444:32, 444:31)
+    Two portrait phone screens side by side.
+    Swap each CasePlaceholder for a CaseImage once PNGs are exported.
   */}
   <div class="iteration-row">
-    <CaseBanner title="первый вариант интерфейса" />
-    <CaseBanner title="второй вариант интерфейса" />
+    <CasePlaceholder
+      label="iteration-01.png — Первый вариант интерфейса (Figma 444:32)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="iteration-02.png — Второй вариант интерфейса (Figma 444:31)"
+      ratio="9/16"
+    />
   </div>
+
+  {/*
+    IMAGE SLOT — final 6-screen row (Figma 407:5281)
+    «И конечный вариант» — 6 portrait phone screens in a scrollable row.
+    Swap for a CaseGallery with all 6 imports once PNGs are exported.
+  */}
   <p class="row-label">И конечный вариант</p>
+  <div class="screens-row">
+    <CasePlaceholder
+      label="final-screens-1.png — Конечный вариант, экран 1/6 (Figma 407:5281)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="final-screens-2.png — Конечный вариант, экран 2/6 (Figma 407:5281)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="final-screens-3.png — Конечный вариант, экран 3/6 (Figma 407:5281)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="final-screens-4.png — Конечный вариант, экран 4/6 (Figma 407:5281)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="final-screens-5.png — Конечный вариант, экран 5/6 (Figma 407:5281)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="final-screens-6.png — Конечный вариант, экран 6/6 (Figma 407:5281)"
+      ratio="9/16"
+    />
+  </div>
 
   {/* Основные UX-вызовы */}
   <CaseSection heading={challenges.heading}>
     {challenges.paragraphs?.map((p) => <p>{p}</p>)}
   </CaseSection>
+
+  {/*
+    IMAGE SLOT — UX flow diagrams (Figma 425:4777, 416:4728, 418:4753)
+    Full-width landscape flow diagrams — one per row.
+    Swap each CasePlaceholder for a CaseImage once PNGs are exported.
+  */}
+  <CasePlaceholder
+    label="flow-ar-anchor.png — User Flow: AR-anchor (Figma 425:4777)"
+    ratio="16/9"
+  />
+  <CasePlaceholder
+    label="flow-navigation.png — Многоуровневая навигация (Figma 416:4728)"
+    ratio="16/9"
+  />
+
+  {/*
+    IMAGE SLOT — UX challenge phone screens (Figma 408:9445)
+    «Основные UX-вызовы» — 6 portrait phone screens in a row.
+    Swap for a CaseGallery with all 6 imports once PNGs are exported.
+  */}
+  <div class="screens-row">
+    <CasePlaceholder
+      label="ux-screens-1.png — UX-вызовы экран 1/6 (Figma 408:9445)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="ux-screens-2.png — UX-вызовы экран 2/6 (Figma 408:9445)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="ux-screens-3.png — UX-вызовы экран 3/6 (Figma 408:9445)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="ux-screens-4.png — UX-вызовы экран 4/6 (Figma 408:9445)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="ux-screens-5.png — UX-вызовы экран 5/6 (Figma 408:9445)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="ux-screens-6.png — UX-вызовы экран 6/6 (Figma 408:9445)"
+      ratio="9/16"
+    />
+  </div>
+
+  {/*
+    IMAGE SLOT — AR object positioning flow (Figma 418:4753)
+    Full-width landscape flow diagram.
+    Swap CasePlaceholder for a CaseImage once PNG is exported.
+  */}
+  <CasePlaceholder
+    label="flow-positioning.png — Позиционирование AR объекта (Figma 418:4753)"
+    ratio="16/9"
+  />
 
   {/* Ключевые решения — heading→body blocks */}
   <CaseSection heading={decisions.heading}>
@@ -104,6 +192,12 @@ const [intro, goal, stages, challenges, decisions] = sections;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-4);
+  }
+
+  .screens-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--space-3);
   }
 
   .row-label {
@@ -150,9 +244,18 @@ const [intro, goal, stages, challenges, decisions] = sections;
     color: var(--color-heading);
   }
 
+  @media (max-width: 900px) {
+    .screens-row {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
   @media (max-width: 640px) {
     .iteration-row {
       grid-template-columns: 1fr;
+    }
+    .screens-row {
+      grid-template-columns: repeat(2, 1fr);
     }
     .row-label {
       text-align: left;
