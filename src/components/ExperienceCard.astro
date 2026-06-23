@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Accordion from './Accordion.astro';
 import arImg from '../assets/images/ar-spatially.png';
 import tapImg from '../assets/images/tap-topia.png';
+import { withBase } from '../lib/paths.ts';
 import type { Job } from '../data/content.ts';
 
 export interface Props {
@@ -49,7 +50,7 @@ const preview = job.image ? imageMap[job.image] : null;
               </ul>
               <blockquote class="subproject__note">{sub.note}</blockquote>
               {sub.href ? (
-                <a href={sub.href} class="case-button case-button--link">
+                <a href={withBase(sub.href)} class="case-button case-button--link">
                   <span class="case-button__face">{sub.cta}</span>
                 </a>
               ) : (
@@ -66,7 +67,7 @@ const preview = job.image ? imageMap[job.image] : null;
     {
       job.cta && (
         job.href ? (
-          <a href={job.href} class="case-button case-button--link">
+          <a href={withBase(job.href)} class="case-button case-button--link">
             <span class="case-button__face">
               {job.cta}
             </span>
