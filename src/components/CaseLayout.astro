@@ -1,11 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { withBase } from '../lib/paths.ts';
 interface Props { title: string; }
 const { title } = Astro.props;
 ---
 <Layout title={title}>
   <main class="case container">
-    <a class="back" href="/">← К портфолио</a>
+    <a class="back" href={withBase('/')}>← К портфолио</a>
     <slot />
   </main>
 </Layout>
