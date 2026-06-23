@@ -1,0 +1,260 @@
+---
+// ---------------------------------------------------------------------------
+// IMAGE SWAP PATTERN — see src/pages/cases/ar-spatially.astro header.
+// When a real PNG lands in src/assets/cases/kloo/<name>.png:
+//   1. import myImg from '../../assets/cases/kloo/<name>.png';
+//   2. Replace <CasePlaceholder label="<name>.png — …" /> with
+//      <CaseImage src={myImg} alt="…" /> (or a <CaseGallery>).
+// Filenames, ratios and Figma node ids live in the klooImages manifest in
+// src/data/cases/kloo.ts.
+// ---------------------------------------------------------------------------
+
+import CaseLayout from '../../components/CaseLayout.astro';
+import CaseHero from '../../components/CaseHero.astro';
+import CaseSection from '../../components/CaseSection.astro';
+import CaseResult from '../../components/CaseResult.astro';
+import CasePlaceholder from '../../components/CasePlaceholder.astro';
+// import CaseImage from '../../components/CaseImage.astro';   // when PNGs land
+// import CaseGallery from '../../components/CaseGallery.astro';
+import { kloo } from '../../data/cases/kloo.ts';
+
+const { title, meta, description, tags, sections, result } = kloo;
+const [about, team, task, landing, architecture] = sections;
+---
+
+<CaseLayout title={title}>
+  <CaseHero title={title} meta={meta} description={description} tags={tags} />
+
+  {/* О проекте */}
+  <CaseSection heading={about.heading} list={about.list}>
+    {about.paragraphs?.map((p) => <p>{p}</p>)}
+  </CaseSection>
+
+  {/* Команда и роль — blocks + responsibilities list */}
+  <CaseSection heading={team.heading} list={team.list}>
+    <dl class="decisions">
+      {
+        team.blocks?.map((b) => (
+          <div class="decision">
+            <dt>{b.title}</dt>
+            <dd>{b.body}</dd>
+          </div>
+        ))
+      }
+    </dl>
+    {team.paragraphs?.map((p) => <p>{p}</p>)}
+  </CaseSection>
+
+  {/* Задача */}
+  <CaseSection heading={task.heading}>
+    {task.paragraphs?.map((p) => <p>{p}</p>)}
+  </CaseSection>
+
+  {/* Этап — Landing Page */}
+  <CaseSection heading={landing.heading}>
+    {landing.paragraphs?.map((p) => <p>{p}</p>)}
+  </CaseSection>
+
+  {/*
+    IMAGE SLOT — Landing Page: user flow + landing screenshot (Figma 518:11034, 510:4339)
+  */}
+  <div class="landing-row">
+    <CasePlaceholder
+      label="flow-landing.png — Landing Page user flow (Figma 518:11034)"
+      ratio="424/849"
+    />
+    <CasePlaceholder
+      label="landing.png — Лендинг платформы (Figma 510:4339)"
+      ratio="662/849"
+    />
+  </div>
+
+  {/* Этап — Создание полноценной архитектуры проекта */}
+  <CaseSection heading={architecture.heading} list={architecture.list}>
+    {architecture.paragraphs?.map((p) => <p>{p}</p>)}
+  </CaseSection>
+
+  {/*
+    IMAGE SLOT — sitemap & user flow (Figma 513:4361)
+  */}
+  <p class="row-label">
+    Командой маркетинга и мной проработана карта сайта и основные user flow
+  </p>
+  <CasePlaceholder
+    label="sitemap-userflow.png — Карта сайта и user flow (Figma 513:4361)"
+    ratio="954/616"
+  />
+
+  {/* Часть экранов внутренней системы проекта */}
+  <h2 class="screens-title">Часть экранов внутренней системы проекта</h2>
+
+  <p class="row-label">Dashboard</p>
+  <CasePlaceholder
+    label="dashboard.png — Dashboard, центральный экран системы (Figma 509:4321)"
+    ratio="981/634"
+  />
+  <p class="caption">
+    Центральный экран системы, предоставляющий пользователю быстрый доступ к
+    аналитике, активности и ключевым действиям платформы.
+  </p>
+
+  <CasePlaceholder
+    label="internal-screens.png — Экраны внутренней системы (Figma 515:4409)"
+    ratio="982/223"
+  />
+  <CasePlaceholder
+    label="pricing.png — Тарифные планы и подписка (Figma 517:11017)"
+    ratio="574/471"
+  />
+  <p class="caption">
+    Экран выбора тарифных планов и управления подпиской для пользователей и
+    компаний.
+  </p>
+
+  {/* Feed & Wallet */}
+  <h2 class="screens-title">Feed &amp; Wallet</h2>
+  <div class="screens-grid">
+    <CasePlaceholder
+      label="feed-main.png — Feed & Wallet, главный экран (Figma 515:4444)"
+      ratio="538/348"
+    />
+    <CasePlaceholder
+      label="feed.png — Социальная лента (Figma 515:4445)"
+      ratio="538/347"
+    />
+    <CasePlaceholder
+      label="shopping-cart.png — Корзина (Figma 515:4447)"
+      ratio="538/348"
+    />
+    <CasePlaceholder
+      label="wallet.png — Кошелёк (Figma 515:4448)"
+      ratio="538/348"
+    />
+  </div>
+  <p class="caption">
+    Социальная лента позволяет пользователям взаимодействовать с контентом и
+    экспертами внутри сообщества. Кошелёк объединяет управление балансом,
+    платежами и историей транзакций в едином интерфейсе.
+  </p>
+
+  {/* Часть мобильных экранов платформы */}
+  <h2 class="screens-title">Часть мобильных экранов платформы</h2>
+  <div class="mobile-row">
+    <CasePlaceholder
+      label="mobile-landing.png — Мобильный лендинг (Figma 517:11007)"
+      ratio="207/465"
+    />
+    <CasePlaceholder
+      label="mobile-wallet.png — Мобильный кошелёк (Figma 517:11008)"
+      ratio="207/465"
+    />
+    <CasePlaceholder
+      label="mobile-main-1.png — Мобильная главная 1 (Figma 517:11009)"
+      ratio="207/465"
+    />
+    <CasePlaceholder
+      label="mobile-main-2.png — Мобильная главная 2 (Figma 517:11010)"
+      ratio="207/465"
+    />
+    <CasePlaceholder
+      label="mobile-event.png — Мобильное мероприятие (Figma 517:11011)"
+      ratio="207/465"
+    />
+  </div>
+  <p class="caption">
+    Мобильные интерфейсы платформы обеспечивают быстрый доступ к контенту,
+    событиям, сообществу и управлению аккаунтом, сохраняя единый UX и
+    дизайн-систему продукта.
+  </p>
+
+  {/* Результат */}
+  <CaseResult heading={result.heading} items={result.items} />
+</CaseLayout>
+
+<style>
+  .landing-row {
+    display: grid;
+    grid-template-columns: minmax(0, 424fr) minmax(0, 662fr);
+    gap: var(--space-4);
+    align-items: start;
+  }
+
+  .screens-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+
+  .mobile-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-3);
+  }
+
+  .screens-title {
+    font-size: var(--fs-section);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-32);
+    color: var(--color-heading);
+    text-align: center;
+  }
+
+  .row-label {
+    font-size: var(--fs-role);
+    font-weight: var(--fw-medium);
+    color: var(--color-heading);
+    text-align: center;
+  }
+
+  .caption {
+    color: var(--color-text);
+    line-height: var(--lh-30);
+    text-align: center;
+  }
+
+  /* heading→body blocks (shared shape with ar-spatially.astro) */
+  .decisions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .decision {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .decision dt {
+    font-size: var(--fs-role);
+    font-weight: var(--fw-medium);
+    color: var(--color-heading);
+    line-height: var(--lh-32);
+  }
+
+  .decision dd {
+    margin: 0;
+    color: var(--color-text);
+    line-height: var(--lh-30);
+  }
+
+  @media (max-width: 900px) {
+    .mobile-row {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .landing-row,
+    .screens-grid {
+      grid-template-columns: 1fr;
+    }
+    .mobile-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .row-label,
+    .caption {
+      text-align: left;
+    }
+  }
+</style>

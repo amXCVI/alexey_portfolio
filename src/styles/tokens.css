@@ -53,4 +53,9 @@
   /* ---- Layout ---- */
   --container: 1088px;            /* centred content column (1728 − 2×320) */
   --gutter: clamp(1rem, 5vw, 2.5rem);
+
+  /* ---- Case-study ---- */
+  --color-banner-bg: #1c1c1e;   /* dark feature banners — verify per node */
+  --color-on-dark: #f2f2f2;     /* text on dark banners */
+  --case-section-gap: clamp(var(--space-6), 6vw, calc(var(--space-7) + var(--space-6)));
 }

@@ -1,0 +1,101 @@
+---
+/**
+ * CaseHero — case-study page header: title, optional meta lines, description
+ * and optional discipline chips. Token-styled, reused by every case page.
+ */
+export interface Props {
+  title: string;
+  meta?: string[];
+  description: string;
+  tags?: string[];
+}
+
+const { title, meta, description, tags } = Astro.props;
+---
+
+<header class="case-hero">
+  <h1 class="case-hero__title">{title}</h1>
+  <p class="case-hero__desc">{description}</p>
+
+  {
+    meta && meta.length > 0 && (
+      <div class="case-hero__meta">
+        {meta.map((line) => (
+          <p class="case-hero__meta-row">{line}</p>
+        ))}
+      </div>
+    )
+  }
+
+  {
+    tags && tags.length > 0 && (
+      <ul class="case-hero__tags">
+        {tags.map((tag) => (
+          <li class="chip">{tag}</li>
+        ))}
+      </ul>
+    )
+  }
+</header>
+
+<style>
+  .case-hero {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .case-hero__title {
+    font-size: var(--fs-h1);
+    font-weight: var(--fw-semibold);
+    line-height: 1.1;
+    color: var(--color-heading);
+    letter-spacing: -0.01em;
+    text-align: center;
+  }
+
+  .case-hero__desc {
+    font-size: var(--fs-intro);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-30);
+    color: var(--color-text);
+    text-align: center;
+    max-width: 70ch;
+    margin-inline: auto;
+  }
+
+  .case-hero__meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    font-size: var(--fs-body);
+    color: var(--color-muted);
+  }
+
+  .case-hero__tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: 0;
+  }
+
+  .chip {
+    padding: var(--space-1) var(--space-3);
+    background: var(--color-surface);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-sub);
+    font-weight: var(--fw-medium);
+    color: var(--color-heading);
+    line-height: var(--lh-30);
+  }
+
+  @media (max-width: 640px) {
+    .case-hero__title {
+      text-align: left;
+    }
+    .case-hero__desc {
+      text-align: left;
+    }
+  }
+</style>

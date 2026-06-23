@@ -1,0 +1,264 @@
+---
+// ---------------------------------------------------------------------------
+// IMAGE SWAP PATTERN
+// When a real PNG lands in src/assets/cases/ar-spatially/<name>.png:
+//   1. Add import:  import myImg from '../../assets/cases/ar-spatially/<name>.png';
+//   2. Replace:     <CasePlaceholder label="<name>.png — …" ratio="…" />
+//      With:        <CaseImage src={myImg} alt="…" />
+//            or:    <CaseGallery images={[{ src: myImg, alt: "…" }]} />
+// See arSpatiallyImages manifest in src/data/cases/ar-spatially.ts for all
+// filenames, aspect ratios, and Figma node ids.
+// ---------------------------------------------------------------------------
+
+import CaseLayout from '../../components/CaseLayout.astro';
+import CaseHero from '../../components/CaseHero.astro';
+import CaseSection from '../../components/CaseSection.astro';
+import CaseResult from '../../components/CaseResult.astro';
+import CasePlaceholder from '../../components/CasePlaceholder.astro';
+// CaseImage and CaseGallery imported once real PNGs are exported from Figma:
+// import CaseImage from '../../components/CaseImage.astro';
+// import CaseGallery from '../../components/CaseGallery.astro';
+import { arSpatially } from '../../data/cases/ar-spatially.ts';
+
+const { title, meta, description, tags, sections, result } = arSpatially;
+const [intro, goal, stages, challenges, decisions] = sections;
+---
+
+<CaseLayout title={title}>
+  <CaseHero title={title} meta={meta} description={description} tags={tags} />
+
+  {/* Intro — company context + team roster */}
+  <CaseSection heading={intro.heading} list={intro.list}>
+    {intro.paragraphs?.map((p) => <p>{p}</p>)}
+    {intro.footnotes?.map((p) => <p>{p}</p>)}
+  </CaseSection>
+
+  {/* Цель проекта */}
+  <CaseSection heading={goal.heading} list={goal.list}>
+    {goal.paragraphs?.map((p) => <p>{p}</p>)}
+    {goal.footnotes?.map((p) => <p>{p}</p>)}
+  </CaseSection>
+
+  {/* Этапы создания проекта */}
+  <CaseSection heading={stages.heading}>
+    {stages.paragraphs?.map((p) => <p>{p}</p>)}
+    {stages.footnotes?.map((p) => <p>{p}</p>)}
+  </CaseSection>
+
+  {/*
+    IMAGE SLOT — iteration mockups (Figma 444:32, 444:31)
+    Two portrait phone screens side by side.
+    Swap each CasePlaceholder for a CaseImage once PNGs are exported.
+  */}
+  <div class="iteration-row">
+    <CasePlaceholder
+      label="iteration-01.png — Первый вариант интерфейса (Figma 444:32)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="iteration-02.png — Второй вариант интерфейса (Figma 444:31)"
+      ratio="9/16"
+    />
+  </div>
+
+  {/*
+    IMAGE SLOT — final 6-screen row (Figma 407:5281)
+    «И конечный вариант» — 6 portrait phone screens in a scrollable row.
+    Swap for a CaseGallery with all 6 imports once PNGs are exported.
+  */}
+  <p class="row-label">И конечный вариант</p>
+  <div class="screens-row">
+    <CasePlaceholder
+      label="final-screens-1.png — Конечный вариант, экран 1/6 (Figma 407:5281)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="final-screens-2.png — Конечный вариант, экран 2/6 (Figma 407:5281)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="final-screens-3.png — Конечный вариант, экран 3/6 (Figma 407:5281)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="final-screens-4.png — Конечный вариант, экран 4/6 (Figma 407:5281)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="final-screens-5.png — Конечный вариант, экран 5/6 (Figma 407:5281)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="final-screens-6.png — Конечный вариант, экран 6/6 (Figma 407:5281)"
+      ratio="9/16"
+    />
+  </div>
+
+  {/* Основные UX-вызовы */}
+  <CaseSection heading={challenges.heading}>
+    {challenges.paragraphs?.map((p) => <p>{p}</p>)}
+  </CaseSection>
+
+  {/*
+    IMAGE SLOT — UX flow diagrams (Figma 425:4777, 416:4728, 418:4753)
+    Full-width landscape flow diagrams — one per row.
+    Swap each CasePlaceholder for a CaseImage once PNGs are exported.
+  */}
+  <CasePlaceholder
+    label="flow-ar-anchor.png — User Flow: AR-anchor (Figma 425:4777)"
+    ratio="16/9"
+  />
+  <CasePlaceholder
+    label="flow-navigation.png — Многоуровневая навигация (Figma 416:4728)"
+    ratio="16/9"
+  />
+
+  {/*
+    IMAGE SLOT — UX challenge phone screens (Figma 408:9445)
+    «Основные UX-вызовы» — 6 portrait phone screens in a row.
+    Swap for a CaseGallery with all 6 imports once PNGs are exported.
+  */}
+  <div class="screens-row">
+    <CasePlaceholder
+      label="ux-screens-1.png — UX-вызовы экран 1/6 (Figma 408:9445)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="ux-screens-2.png — UX-вызовы экран 2/6 (Figma 408:9445)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="ux-screens-3.png — UX-вызовы экран 3/6 (Figma 408:9445)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="ux-screens-4.png — UX-вызовы экран 4/6 (Figma 408:9445)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="ux-screens-5.png — UX-вызовы экран 5/6 (Figma 408:9445)"
+      ratio="9/16"
+    />
+    <CasePlaceholder
+      label="ux-screens-6.png — UX-вызовы экран 6/6 (Figma 408:9445)"
+      ratio="9/16"
+    />
+  </div>
+
+  {/*
+    IMAGE SLOT — AR object positioning flow (Figma 418:4753)
+    Full-width landscape flow diagram.
+    Swap CasePlaceholder for a CaseImage once PNG is exported.
+  */}
+  <CasePlaceholder
+    label="flow-positioning.png — Позиционирование AR объекта (Figma 418:4753)"
+    ratio="16/9"
+  />
+
+  {/* Ключевые решения — heading→body blocks */}
+  <CaseSection heading={decisions.heading}>
+    <dl class="decisions">
+      {
+        decisions.blocks?.map((b) => (
+          <div class="decision">
+            <dt>{b.title}</dt>
+            <dd>{b.body}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </CaseSection>
+
+  {/* Результат */}
+  <CaseResult heading={result.heading} items={result.items}>
+    {result.intro?.map((p) => <p>{p}</p>)}
+    {
+      result.achievements && (
+        <div slot="achievements" class="achievements">
+          <p class="achievements__title">{result.achievements.heading}</p>
+          <ul class="bullets">
+            {result.achievements.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </CaseResult>
+</CaseLayout>
+
+<style>
+  .iteration-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+
+  .screens-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--space-3);
+  }
+
+  .row-label {
+    font-size: var(--fs-role);
+    font-weight: var(--fw-medium);
+    color: var(--color-heading);
+    text-align: center;
+  }
+
+  .decisions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .decision {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .decision dt {
+    font-size: var(--fs-role);
+    font-weight: var(--fw-medium);
+    color: var(--color-heading);
+    line-height: var(--lh-32);
+  }
+
+  .decision dd {
+    margin: 0;
+    color: var(--color-text);
+    line-height: var(--lh-30);
+  }
+
+  .achievements {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .achievements__title {
+    font-size: var(--fs-role);
+    font-weight: var(--fw-medium);
+    color: var(--color-heading);
+  }
+
+  @media (max-width: 900px) {
+    .screens-row {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .iteration-row {
+      grid-template-columns: 1fr;
+    }
+    .screens-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .row-label {
+      text-align: left;
+    }
+  }
+</style>
