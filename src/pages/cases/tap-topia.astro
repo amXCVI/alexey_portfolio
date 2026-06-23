@@ -1,0 +1,262 @@
+---
+// ---------------------------------------------------------------------------
+// IMAGE SWAP PATTERN — see src/pages/cases/ar-spatially.astro header.
+// When a real PNG lands in src/assets/cases/tap-topia/<name>.png:
+//   1. import myImg from '../../assets/cases/tap-topia/<name>.png';
+//   2. Replace <CasePlaceholder label="<name>.png — …" /> with
+//      <CaseImage src={myImg} alt="…" /> (or a <CaseGallery>).
+// Filenames, ratios and Figma node ids live in the tapTopiaImages manifest in
+// src/data/cases/tap-topia.ts.
+// ---------------------------------------------------------------------------
+
+import CaseLayout from '../../components/CaseLayout.astro';
+import CaseHero from '../../components/CaseHero.astro';
+import CaseSection from '../../components/CaseSection.astro';
+import CaseResult from '../../components/CaseResult.astro';
+import CaseBanner from '../../components/CaseBanner.astro';
+import CasePlaceholder from '../../components/CasePlaceholder.astro';
+// import CaseImage from '../../components/CaseImage.astro';   // when PNGs land
+// import CaseGallery from '../../components/CaseGallery.astro';
+import {
+  tapTopia,
+  tapTopiaStages,
+  tapTopiaRedesign,
+} from '../../data/cases/tap-topia.ts';
+
+const { title, meta, description, tags, sections, result } = tapTopia;
+const [about, team] = sections;
+const [stage1, stage2, stage3, stage4] = tapTopiaStages;
+---
+
+<CaseLayout title={title}>
+  <CaseHero title={title} meta={meta} description={description} tags={tags} />
+
+  {/* О проекте */}
+  <CaseSection heading={about.heading} list={about.list}>
+    {about.paragraphs?.map((p) => <p>{p}</p>)}
+  </CaseSection>
+
+  {/* IMAGE SLOT — hero art (Figma 449:4088) */}
+  <CasePlaceholder
+    label="hero-art.png — Ключевой визуал игры (Figma 449:4088)"
+    ratio="596/438"
+  />
+
+  {/* Команда и роль — blocks + «Было сделано» list */}
+  <CaseSection heading={team.heading} list={team.list}>
+    <dl class="decisions">
+      {
+        team.blocks?.map((b) => (
+          <div class="decision">
+            <dt>{b.title}</dt>
+            <dd>{b.body}</dd>
+          </div>
+        ))
+      }
+    </dl>
+    {team.paragraphs?.map((p) => <p>{p}</p>)}
+  </CaseSection>
+
+  {/* Этап 1 */}
+  <CaseSection heading={stage1.heading} list={stage1.tasks}>
+    <p>{stage1.intro}</p>
+    <p class="tasks-label">Основные задачи этапа:</p>
+  </CaseSection>
+  <CasePlaceholder
+    label="stage-1.png — Этап 1, иллюстрация (Figma 477:3793)"
+    ratio="437/331"
+  />
+  {stage1.result && <CaseBanner title="Результат">{stage1.result}</CaseBanner>}
+
+  {/* Этап 2 */}
+  <CaseSection heading={stage2.heading} list={stage2.tasks}>
+    <p>{stage2.intro}</p>
+    <p class="tasks-label">Основные задачи этапа:</p>
+  </CaseSection>
+  <CasePlaceholder
+    label="stage-2.png — Этап 2, иллюстрация (Figma 478:3803)"
+    ratio="314/422"
+  />
+  {stage2.result && <CaseBanner title="Результат">{stage2.result}</CaseBanner>}
+
+  {/* Этап 3 */}
+  <CaseSection heading={stage3.heading} list={stage3.tasks}>
+    <p>{stage3.intro}</p>
+    <p class="tasks-label">Основные задачи этапа:</p>
+  </CaseSection>
+  <CasePlaceholder
+    label="stage-3-photo.png — Этап 3, фото (Figma 484:1918)"
+    ratio="507/285"
+  />
+  <p class="row-label">
+    #6 самая популярная игра (за 14 дней) по данным findmini.app · Метрики
+    статистики
+  </p>
+  <div class="metrics-row">
+    <CasePlaceholder
+      label="stage-3-metrics-1.png — Метрики статистики (Figma 483:1898)"
+      ratio="708/450"
+    />
+    <CasePlaceholder
+      label="stage-3-metrics-2.png — Метрики статистики (Figma 484:1913)"
+      ratio="362/450"
+    />
+  </div>
+  {stage3.result && <CaseBanner title="Результат">{stage3.result}</CaseBanner>}
+
+  {/* Этап 4 — редизайн */}
+  <CaseSection heading={stage4.heading}>
+    <p>{stage4.intro}</p>
+    <dl class="decisions">
+      <div class="decision">
+        <dt>Основные проблемы</dt>
+        <dd>
+          <ul class="bullets">
+            {tapTopiaRedesign.problems.map((p) => <li>{p}</li>)}
+          </ul>
+        </dd>
+      </div>
+      <div class="decision">
+        <dt>Цели редизайна</dt>
+        <dd>
+          <ul class="bullets">
+            {tapTopiaRedesign.goals.map((g) => <li>{g}</li>)}
+          </ul>
+        </dd>
+      </div>
+    </dl>
+  </CaseSection>
+  <CasePlaceholder
+    label="redesign-problems.png — Проработка проблемных зон интерфейса (Figma 488:1958)"
+    ratio="466/440"
+  />
+
+  <CaseSection heading="Что было сделано" list={tapTopiaRedesign.done} />
+  <CasePlaceholder
+    label="redesign-done.png — Результат редизайна (Figma 491:2027)"
+    ratio="536/394"
+  />
+
+  {/* Примеры нового UI и UX */}
+  <h2 class="screens-title">Примеры нового UI и UX</h2>
+  <div class="ui-row">
+    <CasePlaceholder
+      label="new-ui-1.png — Новый UI 1 (Figma 493:23331)"
+      ratio="646/510"
+    />
+    <CasePlaceholder
+      label="new-ui-2.png — Новый UI 2 (Figma 493:23336)"
+      ratio="428/510"
+    />
+  </div>
+  <p class="caption">{tapTopiaRedesign.summary}</p>
+  <div class="ui-row ui-row--reverse">
+    <CasePlaceholder
+      label="new-ui-3.png — Новый UI 3 (Figma 493:23330)"
+      ratio="428/510"
+    />
+    <CasePlaceholder
+      label="new-ui-4.png — Новый UI 4 (Figma 493:23329)"
+      ratio="644/510"
+    />
+  </div>
+
+  <p class="row-label">
+    Пример одного из пользовательских сценариев (User Flow): взаимодействие
+    игрока с системой профиля
+  </p>
+  <CasePlaceholder
+    label="user-flow-profile.png — User Flow профиля (Figma 493:23343)"
+    ratio="1080/759"
+  />
+
+  {/* Результат */}
+  <CaseResult heading={result.heading} items={result.items}>
+    {result.intro?.map((p) => <p>{p}</p>)}
+    <p slot="achievements" class="closing">{tapTopiaRedesign.closing}</p>
+  </CaseResult>
+</CaseLayout>
+
+<style>
+  .metrics-row {
+    display: grid;
+    grid-template-columns: minmax(0, 708fr) minmax(0, 362fr);
+    gap: var(--space-4);
+    align-items: start;
+  }
+
+  .ui-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-4);
+    align-items: start;
+  }
+
+  .screens-title {
+    font-size: var(--fs-section);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-32);
+    color: var(--color-heading);
+    text-align: center;
+  }
+
+  .row-label {
+    font-size: var(--fs-role);
+    font-weight: var(--fw-medium);
+    color: var(--color-heading);
+    text-align: center;
+  }
+
+  .tasks-label {
+    font-weight: var(--fw-medium);
+    color: var(--color-heading);
+  }
+
+  .caption {
+    color: var(--color-text);
+    line-height: var(--lh-30);
+    text-align: center;
+  }
+
+  .closing {
+    color: var(--color-text);
+    line-height: var(--lh-30);
+  }
+
+  /* heading→body blocks (shared shape with ar-spatially.astro) */
+  .decisions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .decision {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .decision dt {
+    font-size: var(--fs-role);
+    font-weight: var(--fw-medium);
+    color: var(--color-heading);
+    line-height: var(--lh-32);
+  }
+
+  .decision dd {
+    margin: 0;
+    color: var(--color-text);
+    line-height: var(--lh-30);
+  }
+
+  @media (max-width: 640px) {
+    .metrics-row,
+    .ui-row {
+      grid-template-columns: 1fr;
+    }
+    .row-label,
+    .caption {
+      text-align: left;
+    }
+  }
+</style>

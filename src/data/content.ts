@@ -77,6 +77,7 @@ export const jobs: Job[] = [
     tone: 'muted',
     image: 'tap',
     cta: 'Кейс продукта',
+    href: '/cases/tap-topia',
   },
   {
     company: 'Sleogroup',
